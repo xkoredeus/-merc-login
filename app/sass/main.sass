@@ -9,21 +9,29 @@ $g-reg: 'GothamPro'
 $g-med: 'GothamPro-Medium'
 $g-black: 'GothamPro-Black'
 $g-bold: 'GothamPro-Bold'
-$p-reg: 'Pacifico-Regular'
 
-@mixin ct
+@mixin contain
   background-position: 50% 50%
   background-size: contain
   background-repeat: no-repeat
-@mixin cv
+@mixin cover
   background-position: 50% 50%
   background-size: cover
   background-repeat: no-repeat
+@mixin resp_wid($width)
+  @media only screen and (max-width: $width + "px")
+    @content
+@mixin resp_hei($height)
+  @media only screen and (max-height: $height + "px")
+    @content
 
 .w100
   width: 100%
 .h100
   height: 100%
+.img-fluid
+  max-width: 100%
+  height: auto
 
 @keyframes bzzz
   10%
@@ -116,8 +124,8 @@ select
     box-shadow: 0px 6px 20px rgba(237, 65, 89, 0.4)
 .login
   min-height: 100vh
+  +cover
   background-image: url('../img/login__bg.jpg')
-  @include cv
   display: flex
   align-items: center
   position: relative
@@ -139,13 +147,21 @@ select
   &__logo
     display: inline-block
     margin-bottom: 60px
-    margin-top: -100px
+    +resp_wid(600)
+      margin-top: 0
+      margin-bottom: 30px
+    +resp_hei(630)
+      margin-top: -100px
+    &.bzzz,
     &:hover
       animation: bzzz 1 linear 1.3s
   &__ttl
     font-size: 24px
     font-family: $g-bold
     margin-bottom: 30px
+    +resp_wid(600)
+      font-size: 20px
+      margin-bottom: 20px
   &__in
     display: flex
     flex-direction: column
@@ -156,6 +172,45 @@ select
     background-color: #fff
     box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.15)
     border-radius: 8px
+    +resp_wid(600)
+      padding-left: 20px
+      padding-right: 20px
+    &.invalid
+      .login
+        &__input
+          border-color: $red
+          &::placeholder
+            color: $red
+          &:focus,
+          &:active
+            color: $dark
+            border-color: rgba(151, 151, 151, 0.25)
+            outline: none
+            &::placeholder
+              color: $gr
+        &__message
+          display: block
+    &.signed
+      .login
+        &__enter
+          display: none
+        &__data
+          display: block
+  &__data
+    display: none
+  &__avatar
+    width: 128px
+    height: 128px
+    +resp_wid(600)
+      width: 86px
+      height: 86px
+    border-radius: 50%
+    overflow: hidden
+  &__name
+    font-family: $g-bold
+    font-size: 28px
+    +resp_wid(600)
+      font-size: 18px
   &__input
     color: $dark
     width: 100%
@@ -169,10 +224,6 @@ select
       outline: none
       &::placeholder
         color: $gr
-    &_invalid
-      border-color: $red
-      &::placeholder
-        color: $red
   &__message
     font-size: 14px
     color: $red
@@ -182,3 +233,4 @@ select
     border-radius: 4px
     margin-bottom: 15px
     display: none
+

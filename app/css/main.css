@@ -7,6 +7,11 @@
   height: 100%;
 }
 
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
 @-webkit-keyframes bzzz {
   10% {
     -webkit-transform: translateX(3px) rotate(2deg);
@@ -234,10 +239,10 @@ select {
 
 .login {
   min-height: 100vh;
-  background-image: url("../img/login__bg.jpg");
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
+  background-image: url("../img/login__bg.jpg");
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -273,10 +278,22 @@ select {
 .login__logo {
   display: inline-block;
   margin-bottom: 60px;
-  margin-top: -100px;
 }
 
-.login__logo:hover {
+@media only screen and (max-width: 600px) {
+  .login__logo {
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-height: 630px) {
+  .login__logo {
+    margin-top: -100px;
+  }
+}
+
+.login__logo.bzzz, .login__logo:hover {
   -webkit-animation: bzzz 1 linear 1.3s;
           animation: bzzz 1 linear 1.3s;
 }
@@ -285,6 +302,13 @@ select {
   font-size: 24px;
   font-family: "GothamPro-Bold";
   margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .login__ttl {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .login__in {
@@ -308,6 +332,104 @@ select {
   -webkit-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.15);
           box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .login__in {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.login__in.invalid .login__input {
+  border-color: #ED4159;
+}
+
+.login__in.invalid .login__input::-webkit-input-placeholder {
+  color: #ED4159;
+}
+
+.login__in.invalid .login__input::-moz-placeholder {
+  color: #ED4159;
+}
+
+.login__in.invalid .login__input:-ms-input-placeholder {
+  color: #ED4159;
+}
+
+.login__in.invalid .login__input::-ms-input-placeholder {
+  color: #ED4159;
+}
+
+.login__in.invalid .login__input::placeholder {
+  color: #ED4159;
+}
+
+.login__in.invalid .login__input:focus, .login__in.invalid .login__input:active {
+  color: #525252;
+  border-color: rgba(151, 151, 151, 0.25);
+  outline: none;
+}
+
+.login__in.invalid .login__input:focus::-webkit-input-placeholder, .login__in.invalid .login__input:active::-webkit-input-placeholder {
+  color: #a2a2a2;
+}
+
+.login__in.invalid .login__input:focus::-moz-placeholder, .login__in.invalid .login__input:active::-moz-placeholder {
+  color: #a2a2a2;
+}
+
+.login__in.invalid .login__input:focus:-ms-input-placeholder, .login__in.invalid .login__input:active:-ms-input-placeholder {
+  color: #a2a2a2;
+}
+
+.login__in.invalid .login__input:focus::-ms-input-placeholder, .login__in.invalid .login__input:active::-ms-input-placeholder {
+  color: #a2a2a2;
+}
+
+.login__in.invalid .login__input:focus::placeholder, .login__in.invalid .login__input:active::placeholder {
+  color: #a2a2a2;
+}
+
+.login__in.invalid .login__message {
+  display: block;
+}
+
+.login__in.signed .login__enter {
+  display: none;
+}
+
+.login__in.signed .login__data {
+  display: block;
+}
+
+.login__data {
+  display: none;
+}
+
+.login__avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  .login__avatar {
+    width: 86px;
+    height: 86px;
+  }
+}
+
+.login__name {
+  font-family: "GothamPro-Bold";
+  font-size: 28px;
+}
+
+@media only screen and (max-width: 600px) {
+  .login__name {
+    font-size: 18px;
+  }
 }
 
 .login__input {
@@ -364,30 +486,6 @@ select {
 
 .login__input:focus::placeholder, .login__input:active::placeholder {
   color: #a2a2a2;
-}
-
-.login__input_invalid {
-  border-color: #ED4159;
-}
-
-.login__input_invalid::-webkit-input-placeholder {
-  color: #ED4159;
-}
-
-.login__input_invalid::-moz-placeholder {
-  color: #ED4159;
-}
-
-.login__input_invalid:-ms-input-placeholder {
-  color: #ED4159;
-}
-
-.login__input_invalid::-ms-input-placeholder {
-  color: #ED4159;
-}
-
-.login__input_invalid::placeholder {
-  color: #ED4159;
 }
 
 .login__message {

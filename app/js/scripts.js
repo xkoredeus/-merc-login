@@ -1,39 +1,55 @@
-
-$(".login__submit").on('click', function(e) {
+$('.login__submit').on('click', function(e) {
 
   e.preventDefault();
 
-  var payload = {
-      a: 1,
-      b: 2
+  var fields = {
+      email: document.querySelector('input[name="login__email"]').value,
+      password: document.querySelector('input[name="login__password"]').value
   };
 
-  var data = new FormData();
-  data.append( "json", JSON.stringify( payload ) );
+  console.log(fields);
 
-  (async () => {
-    const rawResponse = await fetch('https://us-central1-mercdev-academy.cloudfunctions.net/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({a: 1, b: 'Textual content'})
-    });
-    const content = await rawResponse.json();
+  fetch('https://us-central1-mercdev-academy.cloudfunctions.net/login', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify( fields )
+  }).then(function(response) {
 
-    console.log(content);
-  })();
+    if(response.ok) {
+      return response.json();
+    }
 
+    throw new Error('E-Mail or password is incorrect');
+  })
+  .then(function (result) {
+      console.log(result);
+
+      $('.login__in').removeClass('invalid');
+      $('.login__logo').removeClass('bzzz');
+      $('.login__in').addClass('signed');
+
+      var name = result.name;
+      var photo = result.photoUrl;
+
+      $('.login__avatar-img').attr('src', photo);
+      $('.login__name').html(name);
+
+      $('.login__input').val('');
+  })
+  .catch(function (error) {
+      console.log('Request failed', error);
+      $('.login__logo').addClass('bzzz');
+      $('.login__in').addClass('invalid')
+      $('.login__message').html(error.message);
+  });
 });
 
+$('.login__logout').on('click', function(e) {
 
+  e.preventDefault();
 
-
-// fetch("/echo/json/",
-// {
-//    method: "POST",
-//    body: data
-// })
-// .then(function(res){ return res.json(); })
-// .then(function(data){ alert( JSON.stringify( data ) ) })
+  $('.login__in').removeClass('signed');
+});
