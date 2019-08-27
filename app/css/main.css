@@ -278,6 +278,9 @@ select {
 .login__logo {
   display: inline-block;
   margin-bottom: 60px;
+  -webkit-transition: .5s all ease-in-out;
+  -o-transition: .5s all ease-in-out;
+  transition: .5s all ease-in-out;
 }
 
 @media only screen and (max-width: 600px) {
@@ -293,9 +296,10 @@ select {
   }
 }
 
-.login__logo.bzzz, .login__logo:hover {
-  -webkit-animation: bzzz 1 linear 1.3s;
-          animation: bzzz 1 linear 1.3s;
+.login__logo:hover {
+  -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
 .login__ttl {
@@ -393,6 +397,11 @@ select {
 
 .login__in.invalid .login__message {
   display: block;
+}
+
+.login__in.bzzz {
+  -webkit-animation: bzzz 1 linear 1.3s;
+          animation: bzzz 1 linear 1.3s;
 }
 
 .login__in.signed .login__enter {

@@ -147,14 +147,14 @@ select
   &__logo
     display: inline-block
     margin-bottom: 60px
+    transition: .5s all ease-in-out
     +resp_wid(600)
       margin-top: 0
       margin-bottom: 30px
     +resp_hei(630)
       margin-top: -100px
-    &.bzzz,
     &:hover
-      animation: bzzz 1 linear 1.3s
+      transform: scale(.9)
   &__ttl
     font-size: 24px
     font-family: $g-bold
@@ -190,6 +190,8 @@ select
               color: $gr
         &__message
           display: block
+    &.bzzz
+      animation: bzzz 1 linear 1.3s
     &.signed
       .login
         &__enter

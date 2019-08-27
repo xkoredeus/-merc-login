@@ -1,8 +1,7 @@
-$('.login__submit').on('click', function(e) {
-
+document.querySelector('.login__submit').addEventListener('click', function(e) {
   e.preventDefault();
 
-  var fields = {
+  let fields = {
       email: document.querySelector('input[name="login__email"]').value,
       password: document.querySelector('input[name="login__password"]').value
   };
@@ -27,29 +26,25 @@ $('.login__submit').on('click', function(e) {
   .then(function (result) {
       console.log(result);
 
-      $('.login__in').removeClass('invalid');
-      $('.login__logo').removeClass('bzzz');
-      $('.login__in').addClass('signed');
+      document.querySelector('.login__in').classList.add('signed');
+      document.querySelector('.login__in').classList.remove('invalid','bzzz');
 
-      var name = result.name;
-      var photo = result.photoUrl;
+      let name = result.name;
+      let photo = result.photoUrl;
 
-      $('.login__avatar-img').attr('src', photo);
-      $('.login__name').html(name);
-
-      $('.login__input').val('');
+      document.querySelector('.login__name').innerHTML = name;
+      document.querySelector('.login__avatar-img')['src'] = photo;
   })
   .catch(function (error) {
       console.log('Request failed', error);
-      $('.login__logo').addClass('bzzz');
-      $('.login__in').addClass('invalid')
-      $('.login__message').html(error.message);
+
+      document.querySelector('.login__in').classList.add('invalid','bzzz');
+      document.querySelector('.login__message').innerHTML = (error.message);
   });
 });
 
-$('.login__logout').on('click', function(e) {
-
+document.querySelector('.login__logout').addEventListener('click', function(e) {
   e.preventDefault();
 
-  $('.login__in').removeClass('signed');
+  document.querySelector('.login__in').classList.remove('signed');
 });
